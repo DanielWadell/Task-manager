@@ -1,10 +1,13 @@
 // CRUD create read update delete
 
-const mongodb = require('mongodb')
-const MongoClient = mongodb.MongoClient
+const { MongoClient, ObjectID } = require('mongodb')
 
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'Task-Manager'
+
+const id = new ObjectID()
+console.log(id.id.length)
+console.log(id.toHexString().length)
 
 MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: true}, (error, client) => {
     if (error) {
@@ -14,8 +17,9 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: 
     const db = client.db(databaseName)
 
     // db.collection('users').insertOne({
-    //     name: 'Daniel',
-    //     age: '19'
+    //     _id: id,
+    //     name: 'Gunther',
+    //     age: '29'
     // }, (error, result) => {
     //     if (error) {
     //         return console.log('Unable to insert user')
@@ -40,22 +44,22 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: 
     //     console.log(result.ops)
     // })
 
-    db.collection('tasks').insertMany([
-        {
-            description: 'take out the trash',
-            completed: true
-        }, {
-            description: 'feed the dog',
-            completed: true
-        }, {
-            description: 'mow the lawn',
-            completed: false
-        }
-    ], (error, result) => {
-        if (error) {
-            return console.log('Unable to insert documents!')
-        }
+    // db.collection('tasks').insertMany([
+    //     {
+    //         description: 'take out the trash',
+    //         completed: true
+    //     }, {
+    //         description: 'feed the dog',
+    //         completed: true
+    //     }, {
+    //         description: 'mow the lawn',
+    //         completed: false
+    //     }
+    // ], (error, result) => {
+    //     if (error) {
+    //         return console.log('Unable to insert documents!')
+    //     }
 
-        console.log(result.ops)
-    })
+    //     console.log(result.ops)
+    // })
 })
